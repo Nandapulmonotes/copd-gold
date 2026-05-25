@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>COPD · GOLD — GOLD 2026 Guidelines</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:#09090f;--surface:#111118;--surface2:#16161f;
+    --border:rgba(255,255,255,0.07);--text:#e8e8f0;--muted:#6b6b80;
+    --accent:#ffca28;--accent-dim:rgba(255,202,40,0.1);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
+  .topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+  .topbar-left{display:flex;align-items:center;gap:16px;}
+  .hub-link{text-decoration:none;color:var(--muted);font-size:12px;font-family:'DM Mono',monospace;letter-spacing:1px;display:flex;align-items:center;gap:6px;transition:color 0.2s;}
+  .hub-link:hover{color:var(--accent);}
+  .sep{color:var(--border);font-size:16px;}
+  .repo-badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;background:var(--accent-dim);border:1px solid rgba(255,202,40,0.25);border-radius:4px;padding:3px 10px;}
+  .topbar-right{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;}
+  .hero{padding:52px 40px 40px;border-bottom:1px solid var(--border);background:radial-gradient(ellipse at top left,rgba(255,202,40,0.07) 0%,transparent 60%);}
+  .hero-emoji{font-size:40px;margin-bottom:12px;display:block;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:900;letter-spacing:-0.5px;line-height:1.1;color:#fff;margin-bottom:10px;}
+  .hero h1 span{color:var(--accent);}
+  .hero-desc{font-size:14px;color:var(--muted);max-width:560px;line-height:1.6;}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .hero-tag{font-size:11px;font-family:'DM Mono',monospace;background:var(--accent-dim);border:1px solid rgba(255,202,40,0.2);color:var(--accent);border-radius:4px;padding:3px 10px;}
+  .layout{display:flex;min-height:calc(100vh - 160px);}
+  .sidebar{width:220px;flex-shrink:0;border-right:1px solid var(--border);padding:24px 0;position:sticky;top:57px;height:calc(100vh - 57px);overflow-y:auto;}
+  .sidebar::-webkit-scrollbar{width:4px;}
+  .sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+  .nav-group{margin-bottom:24px;}
+  .nav-group-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;padding:0 20px 8px;display:block;}
+  .nav-link{display:flex;align-items:center;justify-content:space-between;padding:7px 20px;font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s,background 0.2s;border-left:2px solid transparent;gap:8px;}
+  .nav-link:hover{color:var(--text);background:rgba(255,255,255,0.03);}
+  .nav-link.ready{color:var(--text);}
+  .nav-link.ready:hover{color:var(--accent);border-left-color:var(--accent);}
+  .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+  .dot-ready{background:var(--accent);}
+  .dot-soon{background:var(--muted);opacity:0.4;}
+  .main{flex:1;padding:36px 40px;}
+  .section-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:16px;margin-top:36px;}
+  .section-title:first-child{margin-top:0;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:8px;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;text-decoration:none;color:inherit;display:block;transition:transform 0.2s,border-color 0.2s,box-shadow 0.2s;position:relative;}
+  .card.ready:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 8px 24px rgba(255,202,40,0.08);}
+  .card.soon{opacity:0.55;cursor:default;}
+  .card-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:6px;}
+  .card-name{font-size:14px;font-weight:500;color:#fff;margin-bottom:6px;line-height:1.3;}
+  .card-sub{font-size:12px;color:var(--muted);line-height:1.4;}
+  .card-status{position:absolute;top:16px;right:16px;font-size:9px;font-family:'DM Mono',monospace;letter-spacing:1px;border-radius:4px;padding:2px 7px;text-transform:uppercase;}
+  .status-ready{background:rgba(255,202,40,0.12);color:var(--accent);border:1px solid rgba(255,202,40,0.2);}
+  .status-soon{background:rgba(255,255,255,0.04);color:var(--muted);border:1px solid rgba(255,255,255,0.06);}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="topbar-left">
+    <a href="https://Nandapulmonotes.github.io/pulmo-hub/" class="hub-link">← HUB</a>
+    <span class="sep">|</span>
+    <span class="repo-badge">copd-gold</span>
+  </div>
+  <div class="topbar-right">GOLD 2026 Guidelines</div>
+</nav>
+<div class="hero">
+  <span class="hero-emoji">🌬️</span>
+  <h1>COPD · <span>GOLD</span></h1>
+  <p class="hero-desc">Comprehensive COPD reference based on GOLD 2026 — classification, phenotypes, management, exacerbations, rehabilitation, and surgical options.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">GOLD 2026</span><span class="hero-tag">ABE Groups</span><span class="hero-tag">AECOPD</span>
+    <span class="hero-tag">Phenotypes</span><span class="hero-tag">Pulm Rehab</span><span class="hero-tag">LTOT</span>
+  </div>
+</div>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="nav-group">
+      <span class="nav-group-label">Foundations</span>
+      <a href="#" class="nav-link soon"><span>Definition & Epidemiology</span><span class="dot dot-soon"></span></a>
+      <a href="#" class="nav-link soon"><span>Pathophysiology</span><span class="dot dot-soon"></span></a>
+      <a href="#" class="nav-link soon"><span>Spirometry in COPD</span><span class="dot dot-soon"></span></a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-group-label">GOLD 2026</span>
+      <a href="#" class="nav-link soon"><span>Classification & ABE</span><span class="dot dot-soon"></span></a>
+      <a href="#" class="nav-link soon"><span>Stable COPD Rx</span><span class="dot dot-soon"></span></a>
+      <a href="#" class="nav-link soon"><span>AECOPD</span><span class="dot dot-soon"></span></a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-group-label">Phenotypes</span>
+      <a href="#" class="nav-link soon"><span>Emphysema vs Bronchitis</span><span class="dot dot-soon"></span></a>
+      <a href="#" class="nav-link soon"><span>Frequent Exacerbator</span><span class="dot dot-soon"></span></a>
+      <a href="#" class="nav-link soon"><span>Eosinophilic COPD</span><span class="dot dot-soon"></span></a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-group-label">Non-Pharmacological</span>
+      <a href="#" class="nav-link soon"><span>Pulmonary Rehab</span><span class="dot dot-soon"></span></a>
+      <a href="#" class="nav-link soon"><span>LTOT & NIV</span><span class="dot dot-soon"></span></a>
+      <a href="#" class="nav-link soon"><span>Surgical Options</span><span class="dot dot-soon"></span></a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-group-label">Special Topics</span>
+      <a href="#" class="nav-link soon"><span>Alpha-1 AAT Deficiency</span><span class="dot dot-soon"></span></a>
+      <a href="#" class="nav-link soon"><span>COPD Comorbidities</span><span class="dot dot-soon"></span></a>
+      <a href="#" class="nav-link soon"><span>CXR & CT in COPD</span><span class="dot dot-soon"></span></a>
+    </div>
+  </aside>
+  <main class="main">
+    <p class="section-title">Foundations</p>
+    <div class="cards">
+      <a href="#" class="card soon"><div class="card-num">01</div><div class="card-name">Definition, Epidemiology & Risk Factors</div><div class="card-sub">Spirometric definition, global burden, risk factors (tobacco, biomass, occupational)</div><span class="card-status status-soon">Soon</span></a>
+      <a href="#" class="card soon"><div class="card-num">02</div><div class="card-name">Pathophysiology</div><div class="card-sub">Airflow limitation mechanisms, mucus hypersecretion, gas trapping, systemic effects</div><span class="card-status status-soon">Soon</span></a>
+      <a href="#" class="card soon"><div class="card-num">03</div><div class="card-name">Spirometry in COPD</div><div class="card-sub">Post-BD FEV₁/FVC < 0.70, severity grades, bronchodilator reversibility</div><span class="card-status status-soon">Soon</span></a>
+      <a href="#" class="card soon"><div class="card-num">04</div><div class="card-name">Clinical Examination & CXR</div><div class="card-sub">Barrel chest, hyperinflation signs, pursed lips breathing, CXR & CT features</div><span class="card-status status-soon">Soon</span></a>
+    </div>
+    <p class="section-title">GOLD 2026 Guidelines</p>
+    <div class="cards">
+      <a href="#" class="card soon"><div class="card-num">05</div><div class="card-name">GOLD 2026 Classification & ABE Groups</div><div class="card-sub">Spirometric severity (GOLD 1-4), symptom/exacerbation groups (A/B/E), mMRC/CAT</div><span class="card-status status-soon">Soon</span></a>
+      <a href="#" class="card soon"><div class="card-num">06</div><div class="card-name">Stable COPD Management</div><div class="card-sub">Initial & follow-up pharmacotherapy, escalation/de-escalation, ICS indications</div><span class="card-status status-soon">Soon</span></a>
+      <a href="#" class="card soon"><div class="card-num">07</div><div class="card-name">AECOPD — Acute Exacerbations</div><div class="card-sub">Definition, triggers, severity assessment, hospital vs outpatient Rx, SABA, steroids, antibiotics</div><span class="card-status status-soon">Soon</span></a>
+      <a href="#" class="card soon"><div class="card-num">08</div><div class="card-name">Antibiotic Stewardship in AECOPD</div><div class="card-sub">When to use antibiotics, choice, Anthonisen criteria, GOLD 2026 guidance</div><span class="card-status status-soon">Soon</span></a>
+    </div>
+    <p class="section-title">Phenotypes & Endotypes</p>
+    <div class="cards">
+      <a href="#" class="card soon"><div class="card-num">09</div><div class="card-name">COPD Phenotypes</div><div class="card-sub">Emphysema-predominant, chronic bronchitis, frequent exacerbator, eosinophilic</div><span class="card-status status-soon">Soon</span></a>
+      <a href="#" class="card soon"><div class="card-num">10</div><div class="card-name">Asthma-COPD Overlap (ACO)</div><div class="card-sub">Diagnostic criteria, spirometric features, treatment approach</div><span class="card-status status-soon">Soon</span></a>
+      <a href="#" class="card soon"><div class="card-num">11</div><div class="card-name">Alpha-1 Antitrypsin Deficiency</div><div class="card-sub">Genetics, clinical features, diagnosis, augmentation therapy</div><span class="card-status status-soon">Soon</span></a>
+    </div>
+    <p class="section-title">Non-Pharmacological & Surgical</p>
+    <div class="cards">
+      <a href="#" class="card soon"><div class="card-num">12</div><div class="card-name">Pulmonary Rehabilitation</div><div class="card-sub">Indications, components, outcomes, post-AECOPD rehab</div><span class="card-status status-soon">Soon</span></a>
+      <a href="#" class="card soon"><div class="card-num">13</div><div class="card-name">LTOT & NIV in COPD</div><div class="card-sub">LTOT criteria, O₂ delivery devices, nocturnal NIV, hypercapnic COPD</div><span class="card-status status-soon">Soon</span></a>
+      <a href="#" class="card soon"><div class="card-num">14</div><div class="card-name">Surgical Options</div><div class="card-sub">LVRS, bullectomy, endobronchial valves, lung transplantation criteria</div><span class="card-status status-soon">Soon</span></a>
+    </div>
+  </main>
+</div>
+</body>
+</html>
